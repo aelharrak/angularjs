@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- Declaring the ng-app -->
+<html ng-app="user">
+    <head>
+        <title>Gestion des utilisateurs</title>
+        <!-- Importing the script depuis CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <script>
+            // Creating the module called user
+            var user = angular.module("user", []);
+            // Registering the userCtrl to the user module
+            user.controller("userCtrl", function ($scope) {
+                // Binding the users's array to the scope
+                $scope.users = [
+                    {name: 'amine'},
+                    {name: 'imane'},
+                    {name: 'roua'},
+                    {name: 'joud'},
+                    {name: 'saad'}
+                ];
+                // Binding the add function to the scope
+                $scope.add = function (user) {
+                    $scope.users.push(angular.copy(user));
+                    delete $scope.user;
+                };
+            });
+        </script>
+
+    </head>
+    <!-- Attaching the view to the userCtrl -->
+    <body ng-controller="userCtrl">
+        <h3>Users</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterating over the users -->
+                <tr ng-repeat="user in users">
+                    <!-- Showing the user's names -->
+                    <td>{{user.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Binding the car object, with plate, to the scope -->
+        <input type="text" ng-model="user.name"/>
+        <!-- Binding the park function to the click event -->
+        <button ng-click="add(user)">Park</button>
+    </body>
+</html>
